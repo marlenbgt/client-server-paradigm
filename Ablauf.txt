@@ -1,0 +1,39 @@
+Grundidee
+
+- Server läuft und wartet auf eingehende TCP Verbindungen
+- Client verbindet sich mit Befehlen LIST, GET <Dateiname>, QUIT
+- Server antwortet (Liste der Dateinamen, Dateiinhalt, beendet Verbindung)
+- Parallelisierung mit fork in C
+
+
+Teilaufgaben
+
+a) Netzwerk-Basics
+
+- minimales Echo-Programm (Server, der Nachrichten vom Client empfängt und zurücksendet)
+- Berkeley Sockets API:
+socket(), bind(), listen(), accept() auf der Serverseite
+connect() auf der Clientseite
+send(), recv() zum Datenaustausch
+- erst wenn das Echo läuft, weitergehen
+
+b) Befehlsverarbeitung
+
+- Befehlsschleife: Empfange String vom Client, Prüfe, ob es LIST, GET ... oder QUIT ist, Antworte
+
+c) Dateizugriff
+
+- im Server:
+LIST: per opendir() + readdir() die Dateinamen sammeln
+GET <Dateiname>: per fopen() + fread() den Inhalt einlesen und schicken
+- Fehlerbehandlung (Datei existiert nicht, keine Berechtigung, etc.)
+
+d) Mehrere Clients
+
+- Sobald ein Client funktioniert: Server anpassen, sodass er mehrere Verbindungen gleichzeitig bedienen kann mit fork() (pro Verbindung neuer Prozess)
+
+e) Fehlerbehandlung
+
+- Prüfe Rückgabewerte jeder Socket-/Dateifunktion
+- Sende klare Fehlermeldungen vom Server an den Client (z. B. "ERROR Datei nicht gefunden\n")
+- Client gibt Fehlermeldungen sauber aus

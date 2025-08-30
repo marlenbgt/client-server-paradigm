@@ -1,8 +1,5 @@
-Programmierübung Rechnernetze SS 25
-Ziele: Die Aufgaben 1 und 2 sind nicht Prüfungsrelevant und dienen
-ausschließlich zum Vertiefen der Vorlesunginhalte
-Aufgabe 1: Client/Server Paradigma
-Programmieren Sie einen stark vereinfachten Dateiserver und einen dazu passenden Client!
+# Programmierübung Rechnernetze SS 25 - Client/Server Paradigma
+Programmieren Sie einen stark vereinfachten Dateiserver und einen dazu passenden Client.
 Der Server soll Zugriff auf ein Verzeichnis mit mehreren (kleinen) Textdateien haben. Mittels
 Anfragen soll er das Auflisten der Dateien im Verzeichnis sowie die Rückgabe eines
 Dateiinhaltes ermöglichen.
@@ -22,4 +19,3 @@ Client abgefangen und behandelt werden (Ausgabe von Fehlermeldung).
 Hinweise:
 Client und Server können auf demselben Gerät laufen und über Ports oberhalb von
 50000 kommunizieren
-GUI-Anwendungen werden nicht gefordert (Konsolenanwendungen sind ausreichend!)
