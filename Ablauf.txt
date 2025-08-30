@@ -1,10 +1,44 @@
+-- Bibliotheken: 
+<unistd.h> Stammt aus dem POSIX-Standard (UNIX-Systemaufrufe)
+Enthält Funktionen für:
+Prozesssteuerung: fork(), exec(), _exit()
+Dateideskriptoren: close(), read(), write(), dup()
+Arbeitsumgebung: getpid(), getcwd(), chdir(), sleep()
+
+Linux:
+<arpa/inet.h>
+ARPA = Advanced Research Projects Agency
+Enthält Funktionen/Makros für IP-Adressumwandlungen:
+inet_addr() → String "127.0.0.1" in Binärform (in_addr_t)
+inet_ntoa() → umgekehrt, Binäradresse in String
+htons() / htonl() → Host-to-Network-Byteorder (Short/Long)
+ntohs() / ntohl() → Network-to-Host
+<sys/socket.h> (indirekt durch <arpa/inet.h>)
+Enthält Definitionen für die Socket-API:
+socket(), bind(), listen(), accept(), connect()
+Konstanten: AF_INET, SOCK_STREAM, etc.
+
+Windows (Winsock):
+#include <winsock2.h>
+#include <ws2tcpip.h>
+Funktionen heißen gleich (socket, connect, send, recv), aber close() ist closesocket()
+Vor der Benutzung der Sockets musst du Winsock initialisieren:
+WSADATA wsa;
+if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
+    printf("Winsock-Init fehlgeschlagen\n");
+    return 1;
+}
+Am Ende:
+WSACleanup();
+
+--
+
 Grundidee
 
 - Server läuft und wartet auf eingehende TCP Verbindungen
 - Client verbindet sich mit Befehlen LIST, GET <Dateiname>, QUIT
 - Server antwortet (Liste der Dateinamen, Dateiinhalt, beendet Verbindung)
 - Parallelisierung mit fork in C
-
 
 Teilaufgaben
 
