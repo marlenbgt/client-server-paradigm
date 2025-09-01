@@ -20,7 +20,7 @@ int main() {
         return 1;
     }
     // Socket anlegen
-    server_fd = socket(AF_INET, SOCK_STREAM, 0);
+    server_fd = socket(AF_INET, SOCK_STREAM, 0); // UDP: SOCK_DGRAM; IPv4 weil AF_INET
     if (server_fd == INVALID_SOCKET) {
         printf("Socket konnte nicht erstellt werden\n");
         WSACleanup();
