@@ -7,6 +7,14 @@ gcc server.c -o server.exe -lws2_32
 ```
 gcc client.c -o client.exe -lws2_32
 ```
+### Dann je starten
+```
+./server.exe
+```
+```
+./client.exe
+```
+
 ### Aufgabenstellung
 Programmieren Sie einen stark vereinfachten Dateiserver und einen dazu passenden Client. Der Server soll Zugriff auf ein Verzeichnis mit mehreren (kleinen) Textdateien haben. Mittels Anfragen soll er das Auflisten der Dateien im Verzeichnis sowie die Rückgabe eines
 Dateiinhaltes ermöglichen. Der Client soll als Konsolenanwendung das Verbinden zum Server, Absetzen der Anfragen/Befehle sowie die Ausgabe der Antworten ermöglichen. Folgende Befehle sollen unterstützt werden:

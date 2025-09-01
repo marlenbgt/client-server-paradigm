@@ -22,7 +22,7 @@ Windows (Winsock):
 #include <winsock2.h>
 #include <ws2tcpip.h>
 Funktionen heißen gleich (socket, connect, send, recv), aber close() ist closesocket()
-Vor der Benutzung der Sockets musst du Winsock initialisieren:
+Vor Benutzung der Sockets Winsock initialisieren:
 WSADATA wsa;
 if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
     printf("Winsock-Init fehlgeschlagen\n");
