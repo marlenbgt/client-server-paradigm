@@ -1,30 +1,27 @@
-# Programmierübung Rechnernetze SS 25 - Client/Server Paradigma
-
-### Ausführen unter Windows (MSYS2 Mingw64)
+# Programmeringsövning Datornätverk - Client/Server Paradigm
+### Kör på Windows (MSYS2 Mingw64)
 ```
 gcc server.c -o server.exe -lws2_32
 ```
 ```
 gcc client.c -o client.exe -lws2_32
 ```
-### Dann je starten
+### Kör sedan 
 ```
 ./server.exe
 ```
 ```
 ./client.exe
 ```
-
-### Aufgabenstellung
-Programmieren Sie einen stark vereinfachten Dateiserver und einen dazu passenden Client. Der Server soll Zugriff auf ein Verzeichnis mit mehreren (kleinen) Textdateien haben. Mittels Anfragen soll er das Auflisten der Dateien im Verzeichnis sowie die Rückgabe eines
-Dateiinhaltes ermöglichen. Der Client soll als Konsolenanwendung das Verbinden zum Server, Absetzen der Anfragen/Befehle sowie die Ausgabe der Antworten ermöglichen. Folgende Befehle sollen unterstützt werden:
-LIST Dateiauflistung (Rückgabe aller Dateinamen im Verzeichnis) GET <Dateiname> (Anfordern der Textdatei <Dateiname> im Verzeichnis) QUIT (Schließen der Verbindung).
-
-#### Zusätzliche Anforderungen:
-1. TCP muss als Transportprotokoll eingesetzt werden.
-2. Der Client soll mehrere Befehle absetzen können und die Verbindung soll
-aufrechterhalten werden.
-3. Der Server soll Anfragen von mehreren Clients parallel verarbeiten können.
-4. Fehler (z.B. Datei nicht vorhanden, Server nicht erreichbar) sollen von Server und Client abgefangen und behandelt werden (Ausgabe von Fehlermeldung).
-#### Hinweise:
-Client und Server können auf demselben Gerät laufen und über Ports oberhalb von 50000 kommunizieren.
+### Uppgift
+Programmera en mycket förenklad filserver och en motsvarande klient. Servern ska ha tillgång till en katalog som innehåller flera textfiler. Med hjälp av förfrågningar bör den möjliggöra listning av filer i katalogen och retur av filinnehållet. Klienten, som en konsolapplikation, bör tillåta anslutning till servern, skicka förfrågningar/kommandon och utmatning av svar. Följande kommandon bör stödjas:
+LIST Fillista,
+GET <filnam>,
+QUIT.
+#### Ytterligare krav
+- TCP måste användas som transportprotokoll
+- klienten måste kunna skicka flera kommandon och anslutningen måste upprätthållas
+- servern måste kunna bearbeta förfrågningar från flera klienter parallellt
+- fel (t.ex. fil saknas, servern kan inte nås) måste fångas upp och hanteras av både servern och klienten (visa ett felmeddelande)
+#### Anmärkningar
+Klienten och servern kan köras på samma enhet och kommunicera via portar över 50000.

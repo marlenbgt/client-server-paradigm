@@ -49,7 +49,6 @@ a) Netzwerk-Basics
 socket(), bind(), listen(), accept() auf der Serverseite
 connect() auf der Clientseite
 send(), recv() zum Datenaustausch
-- erst wenn das Echo läuft, weitergehen
 
 b) Befehlsverarbeitung
 

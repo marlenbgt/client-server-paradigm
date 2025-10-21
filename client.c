@@ -15,28 +15,28 @@ int main() {
 
     // init Winsock
     if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
-        printf("WSASTartup fehlgeschlagen\n");
+        printf("WSASTartup misslyckades\n");
         return 1;
     }
-    // Socket anlegen
+    // skapa socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == INVALID_SOCKET) {
-        printf("Socket konnte nicht erstellt werden\n");
+        printf("Socket skapas inte\n");
         WSACleanup();
         return 1;
     }
-    // Serveradresse konfigurieren
+    // konfigurera serveradress
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
     server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    // Verbindung herstellen
+    // skapa förbindelse
     if (connect(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
-        printf("Verbindung zum Server fehlgeschlagen\n");
+        printf("Anslutning till server misslyckades\n");
         closesocket(sock);
         WSACleanup();
         return 1;
     }
-    // Nachrichten
+    // meddelanden
     printf("Mit dem Server verbunden. Tippe Nachrichten:\n");
     while (1) {
         printf("> ");
@@ -44,11 +44,11 @@ int main() {
         send(sock, buffer, strlen(buffer), 0);
         int n = recv(sock, buffer, BUF_SIZE - 1, 0);
         if (n<=0) {
-            printf("Verbindung beendet.\n");
+            printf("Anslutningen avslutad.\n");
             break;
         }
         buffer[n] = '\0';
-        printf("Echo vom Server: %s", buffer);
+        printf("Eko från servern: %s", buffer);
     }
     closesocket(sock);
     WSACleanup();

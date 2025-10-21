@@ -9,6 +9,7 @@
 #define BUF_SIZE 1024
 
 int main() {
+    setvbuf(stdout, NULL, _IONBF, 0);
     WSADATA wsa;
     SOCKET server_fd, client_fd;
     struct sockaddr_in server_addr, client_addr;
@@ -16,48 +17,48 @@ int main() {
     char buffer[BUF_SIZE];
     // Winsock initialisieren
     if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
-        printf("WSAStartup fehlgeschlagen\n");
+        printf("WSAStartup misslyckades\n");
         return 1;
     }
-    // Socket anlegen
+    // skapa socket
     server_fd = socket(AF_INET, SOCK_STREAM, 0); // UDP: SOCK_DGRAM; IPv4 weil AF_INET
     if (server_fd == INVALID_SOCKET) {
-        printf("Socket konnte nicht erstellt werden\n");
+        printf("Socket skapas inte\n");
         WSACleanup();
         return 1;
     }
-    // Adresse konfigurieren
+    // konfigurera adress
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(PORT);
-    // Binden
+    // Bind
     if (bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) == SOCKET_ERROR) {
-        printf("Bind fehlgeschlagen: %d\n", WSAGetLastError());
+        printf("Bind misslyckades: %d\n", WSAGetLastError());
         closesocket(server_fd);
         WSACleanup();
         return 1;
     }
-     // Auf Verbindungen warten
+     // vänta på förbindelse
     listen(server_fd, 5);
-    printf("Server läuft auf Port %d ...\n", PORT);
-    // Verbindung annehmen
+    printf("Servern körs på port %d ...\n", PORT);
+    // acceptera anslutning
     client_fd = accept(server_fd, (struct sockaddr*)&client_addr, &addr_len);
     if (client_fd == INVALID_SOCKET) {
-        printf("Accept fehlgeschlagen\n");
+        printf("Accept misslyckades\n");
         closesocket(server_fd);
         WSACleanup();
         return 1;
     }
-    printf("Client verbunden.\n");
-    // Echo-Schleife
+    printf("Klient ansluten.\n");
+    // Eko-Loop
     while (1) {
         int n = recv(client_fd, buffer, BUF_SIZE - 1, 0);
         if (n <= 0) {
-            printf("Client getrennt.\n");
+            printf("Client okopplad.\n");
             break;
         }
         buffer[n] = '\0';
-        printf("Empfangen: %s", buffer);
+        printf("Mottagen: %s", buffer);
 
         send(client_fd, buffer, n, 0);
     }
